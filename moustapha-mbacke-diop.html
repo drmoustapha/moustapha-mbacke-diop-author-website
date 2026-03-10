@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moustapha Mbacké Diop — Author of African Speculative Fiction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Darker+Grotesque:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ochre:     #C8732A;
+    --ochre-lt:  #E09050;
+    --clay:      #8B3A1E;
+    --sand:      #F2E8D5;
+    --sand-dk:   #DDD0B8;
+    --soil:      #2C1A0E;
+    --smoke:     #F7F2EA;
+    --text:      #1E1008;
+    --muted:     #7A5C44;
+    --accent:    #C8732A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--smoke);
+    color: var(--text);
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.028;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(247,242,234,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand-dk);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--soil);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ochre); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--soil);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 7rem 5rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border: 2px solid rgba(200,115,42,0.15);
+    border-radius: 50%;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(200,115,42,0.1);
+    border-radius: 50%;
+  }
+
+  .hero-kicker {
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5.5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--sand);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-name em { font-style: italic; color: var(--ochre-lt); }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--sand-dk);
+    max-width: 360px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+    border-left: 2px solid var(--ochre);
+    padding-left: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.8rem;
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s;
+  }
+
+  .btn-primary { background: var(--ochre); color: #fff; }
+  .btn-primary:hover { background: var(--clay); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--sand);
+    border: 1px solid rgba(242,232,213,0.4);
+  }
+  .btn-outline:hover { border-color: var(--ochre); color: var(--ochre-lt); }
+
+  .hero-right {
+    position: relative;
+    background: var(--sand);
+    overflow: hidden;
+  }
+
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, var(--sand-dk) 0%, var(--ochre) 60%, var(--clay) 100%);
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-photo-placeholder::before {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 320px; height: 320px;
+    border: 40px solid rgba(44,26,14,0.12);
+    border-radius: 50%;
+  }
+
+  .hero-flag-stripe {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(to right, #00853F 33%, #FDEF42 33%, #FDEF42 66%, #E31B23 66%);
+    opacity: 0.7;
+  }
+
+  .hero-photo-label {
+    position: absolute;
+    bottom: 1.5rem; left: 1.5rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(44,26,14,0.5);
+  }
+
+  .hero-photo-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    opacity: 0.15;
+    color: var(--soil);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 0; }
+
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--soil);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--soil); color: var(--sand); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-photo-frame {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--clay) 0%, var(--ochre) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(242,232,213,0.2);
+  }
+
+  .about-photo-note {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(242,232,213,0.4);
+  }
+
+  .about-photo-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5rem;
+    opacity: 0.15;
+  }
+
+  .about-content .section-label { color: var(--ochre-lt); }
+  .about-content .section-title { color: var(--sand); }
+
+  .about-body {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--sand-dk);
+  }
+
+  .about-body p + p { margin-top: 1.2rem; }
+
+  .about-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(242,232,213,0.1);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--ochre-lt);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+
+  /* ── WORKS ── */
+  #works { background: var(--smoke); }
+
+  .works-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--sand-dk);
+  }
+
+  .tab-btn {
+    padding: 0.7rem 1.6rem;
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active { color: var(--ochre); border-bottom-color: var(--ochre); }
+  .tab-btn:hover { color: var(--ochre); }
+
+  .works-panel { display: none; }
+  .works-panel.active { display: block; }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--sand-dk);
+  }
+
+  .work-card {
+    background: var(--smoke);
+    padding: 2.2rem;
+    position: relative;
+    transition: background 0.25s;
+  }
+
+  .work-card:hover { background: var(--sand); }
+
+  .work-card::before {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    background: var(--ochre);
+    margin-bottom: 1.2rem;
+  }
+
+  .work-venue {
+    font-size: 0.66rem;
+    font-weight: 900;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin-bottom: 0.6rem;
+  }
+
+  .work-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--soil);
+    line-height: 1.25;
+    margin-bottom: 0.8rem;
+  }
+
+  .work-desc {
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .work-year {
+    position: absolute;
+    top: 2.2rem; right: 2.2rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--sand-dk);
+  }
+
+  .work-tag {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    background: var(--sand);
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .work-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .work-link:hover { color: var(--ochre); }
+  .work-link::after { content: '→'; }
+
+  /* Books grid */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .book-card {
+    border: 1px solid var(--sand-dk);
+    padding: 2rem;
+    background: var(--smoke);
+    transition: border-color 0.25s;
+  }
+
+  .book-card:hover { border-color: var(--ochre); }
+
+  .book-cover {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--clay), var(--ochre));
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    opacity: 0.6;
+    color: var(--sand);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-cover::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(242,232,213,0.2);
+  }
+
+  .book-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--soil);
+    margin-bottom: 0.4rem;
+  }
+
+  .book-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  /* ── PRESS KIT STRIP ── */
+  .presskit-strip {
+    background: var(--ochre);
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .presskit-text { color: #fff; font-size: 0.85rem; font-weight: 400; }
+
+  .presskit-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+
+  .btn-presskit {
+    background: var(--soil);
+    color: var(--sand);
+    padding: 0.7rem 1.6rem;
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .btn-presskit:hover { background: var(--clay); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--soil); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .contact-left .section-label { color: var(--ochre-lt); }
+  .contact-left .section-title { color: var(--sand); }
+
+  .contact-body {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--sand-dk);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-detail-label {
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ochre);
+  }
+
+  .contact-detail-value {
+    font-size: 0.95rem;
+    color: var(--sand-dk);
+    font-weight: 300;
+  }
+
+  .contact-detail-value a { color: var(--ochre-lt); text-decoration: none; }
+  .contact-detail-value a:hover { text-decoration: underline; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .form-group label {
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ochre);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: rgba(242,232,213,0.05);
+    border: 1px solid rgba(242,232,213,0.15);
+    padding: 0.85rem 1rem;
+    color: var(--sand);
+    font-family: 'Darker Grotesque', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8732A' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  .form-group select option { background: var(--soil); color: var(--sand); }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--ochre); }
+
+  .form-group textarea { min-height: 130px; resize: vertical; }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(242,232,213,0.25); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+
+  .footer-links a {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--ochre); }
+
+  .footer-copy {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: rgba(122,92,68,0.5);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 280px; }
+    .hero-left { padding: 7rem 2rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .works-grid, .books-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .container { padding: 0 1.5rem; }
+    .presskit-strip { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Moustapha Mbacké Diop</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-kicker">Author · African Speculative Fiction · Dakar, Senegal</div>
+    <h1 class="hero-name">Moustapha<br>Mbacké<br><em>Diop</em></h1>
+    <p class="hero-tagline">
+      Fiction rooted in African mythology and spirituality — published in English and French across two continents.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#works" class="btn btn-primary">Read My Work</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-placeholder">
+      <div class="hero-photo-icon">◈</div>
+      <div class="hero-flag-stripe"></div>
+      <span class="hero-photo-label">Your photo here</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS KIT STRIP -->
+<div class="presskit-strip" id="presskit">
+  <div class="presskit-text">
+    <strong>Press Kit Available</strong>
+    Bio, high-resolution photos, publication list, and interview contact — everything editors and event organisers need.
+  </div>
+  <a href="#" class="btn-presskit" onclick="alert('Link your press-kit PDF here.')">
+    ↓ Download Press Kit
+  </a>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo-frame">
+        <div class="about-photo-icon">◈</div>
+        <span class="about-photo-note">Your photo here</span>
+      </div>
+      <div class="about-content">
+        <div class="section-label reveal">About</div>
+        <h2 class="section-title reveal">Myths, spirits<br>& <em>uncharted worlds</em></h2>
+        <div class="about-body reveal">
+          <p>
+            Moustapha Mbacké Diop is a speculative fiction writer from Dakar, Senegal. A final-year medical student, his writing explores the deep currents of African spirituality and mythology — ancestral, strange, and deeply alive.
+          </p>
+          <p>
+            His short fiction appears in both English and French across venues including <em>Omenana</em>, <em>Agbowo</em>, <em>The Magazine of Fantasy and Science Fiction</em>, <em>Haven Spec</em>, <em>Fractured Lit</em>, and the landmark anthology <em>Africa Risen</em>. His story "A Curse at Midnight" was selected for <em>The Year's Best African Speculative Fiction: Volume 1</em>.
+          </p>
+          <p>
+            He is also the author of the <em>Teranga Chronicles</em>, a Senegalese fantasy series. His audio fiction has been featured on the <em>Nightlight Podcast</em>. He writes under the social handle <strong>@Nobsidienne</strong>.
+          </p>
+        </div>
+        <div class="about-stats reveal">
+          <div>
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Published Works</div>
+          </div>
+          <div>
+            <div class="stat-num">2</div>
+            <div class="stat-label">Languages</div>
+          </div>
+          <div>
+            <div class="stat-num">1</div>
+            <div class="stat-label">Year's Best Selection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:2rem;">
+      <div class="section-label">Bibliography</div>
+      <h2 class="section-title">Published Work</h2>
+    </div>
+
+    <div class="works-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('english', this)">English Fiction</button>
+      <button class="tab-btn" onclick="switchTab('french', this)">French Fiction</button>
+      <button class="tab-btn" onclick="switchTab('books', this)">Books</button>
+    </div>
+
+    <!-- ENGLISH FICTION -->
+    <div class="works-panel active" id="panel-english">
+      <div class="works-grid">
+
+        <div class="work-card">
+          <span class="work-year">2024</span>
+          <div class="work-venue">The Magazine of Fantasy & Science Fiction</div>
+          <div class="work-title">The Ndayaan Sea</div>
+          <p class="work-desc">Published in the Winter 2024 issue of one of the oldest and most prestigious speculative fiction magazines in the world.</p>
+          <a href="https://fandsf.com/current.htm" target="_blank" class="work-link">Visit F&SF</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2023</span>
+          <div class="work-venue">Blackened Roots: An Anthology of the Undead</div>
+          <div class="work-title">Sirabiri of the Restless</div>
+          <p class="work-desc">A story of the undead and the unquiet, rooted in Senegalese myth and darkness, published in this acclaimed horror anthology.</p>
+          <a href="https://www.amazon.com/Blackened-Roots-Anthology-Brandon-Massey-ebook/dp/B0C4Q8QVRK/" target="_blank" class="work-link">Find the Anthology</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2022</span>
+          <div class="work-venue">Africa Risen</div>
+          <div class="work-title">When the Mami Wata Met a Demon</div>
+          <p class="work-desc">Included in the landmark Tor anthology <em>Africa Risen: A New Era of Speculative Fiction</em>, edited by Zelda Knight & Ekpeki.</p>
+          <a href="https://torpublishinggroup.com/africa-risen/" target="_blank" class="work-link">Explore Africa Risen</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2022</span>
+          <div class="work-venue">Haven Spec — Issue 7</div>
+          <div class="work-title">Blackwater Children</div>
+          <p class="work-desc">A tense story threading through an African city at dusk, where history and the supernatural press against one another.</p>
+          <a href="https://www.havenspec.com/blackwater-children" target="_blank" class="work-link">Read Story</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2021</span>
+          <div class="work-venue">Nightlight Podcast — Ep. 502</div>
+          <div class="work-title">Night Rites</div>
+          <p class="work-desc">Flash fiction in audio format, performed for <em>Nightlight</em> — the premier horror podcast celebrating Black creators in the genre.</p>
+          <a href="https://nightlightpod.com/nightlight-podcast/502-night-rites-by-moustapha-mbacke-diop/" target="_blank" class="work-link">Listen Now</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2021</span>
+          <div class="work-venue">Fractured Lit</div>
+          <div class="work-title">I Have Dreamed of the Divine</div>
+          <p class="work-desc">Microfiction at the threshold between prayer and vision, published in this celebrated flash fiction journal.</p>
+          <a href="https://fracturedlit.com/i-have-dreamed-of-the-divine/" target="_blank" class="work-link">Read Story</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2021</span>
+          <div class="work-venue">If There's Anyone Left — Issue 2</div>
+          <div class="work-title">The Bush Took Them All</div>
+          <p class="work-desc">Flash fiction exploring the elemental hunger of the bush and those who disappear into it.</p>
+          <a href="https://www.iftheresanyoneleft.com/stories/moustaphambackediop" target="_blank" class="work-link">Read Story</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2020</span>
+          <div class="work-venue">Mythaxis Magazine — Issue 23</div>
+          <div class="work-title">A Curse at Midnight ★</div>
+          <p class="work-desc">A Senegalese mother's child is stolen by a demon — and she must use her own mother's magic to get him back. Reprinted in <em>The Year's Best African Speculative Fiction: Volume 1</em>.</p>
+          <a href="https://mythaxis.co.uk/issue-23/curse-midnight.html" target="_blank" class="work-link">Read Story</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FRENCH FICTION -->
+    <div class="works-panel" id="panel-french">
+      <div class="works-grid">
+
+        <div class="work-card">
+          <span class="work-year">2023</span>
+          <div class="work-venue">Omenana — Issue 25</div>
+          <div class="work-title">Chemins Ténébreux</div>
+          <p class="work-desc">Une nouvelle parue dans le magazine panafricain de fiction spéculative <em>Omenana</em>.</p>
+          <a href="https://omenana.com/2023/03/31/chemins-tenebreux-moustapha-mbacke-diop/" target="_blank" class="work-link">Lire la nouvelle</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2022</span>
+          <div class="work-venue">Agbowo Magazine — Issue Y</div>
+          <div class="work-title">Liberté</div>
+          <p class="work-desc">Une nouvelle publiée dans <em>Agbowo</em>, magazine littéraire nigérian dédié aux voix africaines contemporaines.</p>
+          <a href="https://agbowo.org/2022/11/30/liberte-moustapha-mbacke-diop/" target="_blank" class="work-link">Lire la nouvelle</a>
+        </div>
+
+        <div class="work-card">
+          <span class="work-year">2021</span>
+          <div class="work-venue">Omenana — Issue 18</div>
+          <div class="work-title">Le Pacte du Fleuve</div>
+          <p class="work-desc">Une nouvelle de fantasy sénégalaise où les esprits de l'eau négocient avec les vivants dans une Afrique de l'Ouest hors du temps.</p>
+          <a href="https://omenana.com/2021/07/21/le-pacte-du-fleuve-par-moustapha-mbacke-diop/" target="_blank" class="work-link">Lire la nouvelle</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BOOKS -->
+    <div class="works-panel" id="panel-books">
+      <div class="books-grid">
+        <div class="book-card">
+          <div class="book-cover">◈</div>
+          <div class="work-venue">Fantasy Series · Senegalese</div>
+          <div class="book-title">Teranga Chronicles: L'Intégrale</div>
+          <p class="book-desc">The complete Senegalese fantasy trilogy — available in print and ebook, drawing on Wolof culture, West African mythology, and the spirit of <em>teranga</em>.</p>
+          <a href="https://a.co/d/2qODMfu" target="_blank" class="work-link">Buy on Amazon</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="section-label reveal">Get in Touch</div>
+        <h2 class="section-title reveal">For editors,<br>agents &amp; <em>events</em></h2>
+        <p class="contact-body reveal">
+          Available for anthology commissions, festival appearances, workshops, panels, and interviews. Fluent in English and French. Based in Dakar — available internationally.
+        </p>
+        <div class="contact-detail reveal">
+          <span class="contact-detail-label">On Twitter / X</span>
+          <span class="contact-detail-value"><a href="https://x.com/mdmoustaf" target="_blank">@mdmoustaf</a></span>
+        </div>
+        <div class="contact-detail reveal">
+          <span class="contact-detail-label">On Instagram &amp; Facebook</span>
+          <span class="contact-detail-value"><a href="https://www.instagram.com/Nobsidienne" target="_blank">@Nobsidienne</a></span>
+        </div>
+        <div class="contact-detail reveal">
+          <span class="contact-detail-label">Based In</span>
+          <span class="contact-detail-value">Dakar, Senegal · Available internationally</span>
+        </div>
+        <div class="contact-detail reveal">
+          <span class="contact-detail-label">Languages</span>
+          <span class="contact-detail-value">English · French</span>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@publication.com">
+        </div>
+        <div class="form-group">
+          <label for="reason">Reason for Contact</label>
+          <select id="reason">
+            <option value="" disabled selected>Select one…</option>
+            <option>Commission / Story Request</option>
+            <option>Interview or Profile</option>
+            <option>Festival / Event Appearance</option>
+            <option>Rights Enquiry</option>
+            <option>Workshop or Panel</option>
+            <option>Translation Rights</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell me about your project or publication…"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="alert('Connect this to Netlify Forms or a backend of your choice.')">
+          Send Message
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Moustapha Mbacké Diop — African Speculative Fiction</span>
+  <ul class="footer-links">
+    <li><a href="https://x.com/mdmoustaf" target="_blank">Twitter / X</a></li>
+    <li><a href="https://www.instagram.com/Nobsidienne" target="_blank">Instagram</a></li>
+    <li><a href="https://beacons.ai/mdmoustaf" target="_blank">Beacons</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Moustapha Mbacké Diop. All rights reserved.</span>
+</footer>
+
+<script>
+  // Tab switcher
+  function switchTab(panelId, btn) {
+    document.querySelectorAll('.works-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + panelId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav active highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--ochre)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
