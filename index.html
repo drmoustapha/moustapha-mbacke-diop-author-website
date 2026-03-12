@@ -472,8 +472,10 @@
   }
   .gallery img {
     flex: 0 0 100%;
+    width: 100%;           /* ensure each slide fills the track */
+    height: 400px;         /* lock the height so the carousel doesn't resize */
     object-fit: contain;
-    max-height: 400px;
+    display: block;        /* remove inline spacing/ baseline jitter */
   }
   .gallery button {
     background: rgba(30,16,8,0.6);
