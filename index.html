@@ -457,6 +457,39 @@
     gap: 1.5rem;
   }
 
+  /* ── GALLERY ── */
+  #gallery { background: var(--smoke); }
+  .gallery {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .gallery-track {
+    display: flex;
+    transition: transform 0.4s ease;
+    will-change: transform;
+  }
+  .gallery img {
+    flex: 0 0 100%;
+    object-fit: contain;
+    max-height: 400px;
+  }
+  .gallery button {
+    background: rgba(30,16,8,0.6);
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  .gallery-prev { left: 0.5rem; }
+  .gallery-next { right: 0.5rem; }
+
   .book-card {
     border: 1px solid var(--sand-dk);
     padding: 2rem;
@@ -915,6 +948,34 @@
       </div>
     </div>
 
+    <!-- GALLERY -->
+    <section id="gallery">
+      <div class="container">
+        <div class="section-label reveal">Gallery</div>
+        <h2 class="section-title reveal">Aesthetic Images</h2>
+        <div class="gallery reveal">
+          <button class="gallery-prev">‹</button>
+          <div class="gallery-track">
+            <img src="assets/aesthetics/1.png" alt="gallery image">
+            <img src="assets/aesthetics/2.png" alt="gallery image">
+            <img src="assets/aesthetics/3.png" alt="gallery image">
+            <img src="assets/aesthetics/4.png" alt="gallery image">
+            <img src="assets/aesthetics/5.jpg" alt="gallery image">
+            <img src="assets/aesthetics/6.png" alt="gallery image">
+            <img src="assets/aesthetics/7.PNG" alt="gallery image">
+            <img src="assets/aesthetics/8.jpg" alt="gallery image">
+            <img src="assets/aesthetics/ctfr.jpg" alt="gallery image">
+            <img src="assets/aesthetics/podg.png" alt="gallery image">
+            <img src="assets/aesthetics/tbtta.png" alt="gallery image">
+            <img src="assets/aesthetics/THM.png" alt="gallery image">
+            <img src="assets/aesthetics/tns.png" alt="gallery image">
+            <img src="assets/aesthetics/untt.png" alt="gallery image">
+          </div>
+          <button class="gallery-next">›</button>
+        </div>
+      </div>
+    </section>
+
   </div>
 </section>
 
@@ -1009,6 +1070,26 @@
       a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--ochre)' : '';
     });
   });
+
+  // Gallery carousel
+  (function(){
+    const track = document.querySelector('.gallery-track');
+    const slides = Array.from(track.children);
+    const prevBtn = document.querySelector('.gallery-prev');
+    const nextBtn = document.querySelector('.gallery-next');
+    let index = 0;
+    function update() {
+      track.style.transform = `translateX(-${index * 100}%)`;
+    }
+    prevBtn.addEventListener('click', () => {
+      index = (index - 1 + slides.length) % slides.length;
+      update();
+    });
+    nextBtn.addEventListener('click', () => {
+      index = (index + 1) % slides.length;
+      update();
+    });
+  })();
 </script>
 
 </body>
